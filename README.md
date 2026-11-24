@@ -10,7 +10,7 @@ API sencilla para guardar y consultar tareas, que corre en **dos contenedores co
 Los dos están en la red `red_tareas`. La app encuentra a la base por el **nombre del servicio** (`db`), no por IP.
 
 ```
-  Tu navegador / curl
+  El navegador / curl
          │  http://localhost:3000
          ▼
  ┌──────────────────┐      red_tareas      ┌──────────────────┐
@@ -23,19 +23,18 @@ Los dos están en la red `red_tareas`. La app encuentra a la base por el **nombr
 
 ## Requisitos
 
-- Docker Desktop (Windows/macOS) o Docker Engine + Docker Compose v2 (Linux).
+- Docker Desktop Windows o Docker Engine + Docker Compose v2 (Linux).
 - Git.
 
-No necesitas Node.js ni PostgreSQL instalados en tu computador: todo corre dentro de los contenedores.
 
-## Cómo levantarlo
+## Inicio
 
 ```bash
 git clone https://github.com/malejangel/gestor-tareas-devops.git
 cd gestor-tareas-devops
 ```
 
-1. Crea el archivo `.env` a partir del ejemplo y cambia la clave:
+1. se crea el archivo `.env` a partir del ejemplo y cambia la clave:
 
    ```bash
    # Linux / macOS / Git Bash
@@ -53,7 +52,7 @@ cd gestor-tareas-devops
    | `DB_NAME` | Nombre de la base de datos |
    | `APP_PORT` | Puerto de tu equipo para la API (opcional, por defecto 3000) |
 
-2. Levanta los dos contenedores:
+2. Iniciar los dos contenedores:
 
    ```bash
    docker compose up -d --build
@@ -65,9 +64,9 @@ cd gestor-tareas-devops
    docker compose ps
    ```
 
-## Operación de ejemplo
+## ejemplo
 
-Guarda una tarea y luego la consulta; el resultado consultado debe ser igual a lo guardado.
+Guardar una tarea y luego la consultarla; el resultado consultado debe ser igual a lo guardado.
 
 ```bash
 docker compose exec app node scripts/operacion-ejemplo.js
@@ -81,7 +80,7 @@ Resultado obtenido: {"titulo":"Estudiar Docker","descripcion":"Repasar redes y v
 OPERACION DE EJEMPLO: OK
 ```
 
-También puedes hacerlo a mano:
+De manera manual:
 
 ```bash
 curl -X POST http://localhost:3000/tareas -H "Content-Type: application/json" -d "{\"titulo\":\"Entregar proyecto\",\"descripcion\":\"Subir el documento\"}"
@@ -89,7 +88,7 @@ curl http://localhost:3000/tareas/1
 curl http://localhost:3000/salud
 ```
 
-## Orden de arranque
+## Orden de inicio
 
 1. Arranca `db`. Su `healthcheck` (`pg_isready`) dice cuándo acepta conexiones.
 2. `app` tiene `depends_on: condition: service_healthy`, así que **espera** a que `db` esté sana antes de arrancar.
