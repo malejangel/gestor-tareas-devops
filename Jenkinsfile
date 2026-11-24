@@ -1,5 +1,5 @@
 // Pipeline de integración continua del gestor de tareas (Entrega semana 5).
-// Funciona en Windows (bat) y en Linux/macOS (sh): la función ejecutar() elige sola.
+// Funciona en Windows (bat) y en Linux/macOS (sh): la función ejecutar().
 
 def ejecutar(String comando) {
   if (isUnix()) {
